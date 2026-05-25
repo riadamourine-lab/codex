@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy"
+  content="default-src 'self';
+           style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src   https://fonts.gstatic.com;
+           script-src 'self';
+           img-src    'self' data:;
+           connect-src 'none';">
+<title>NEXUS GAMING — Premium Download Portal</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== ANIMATED BACKGROUND ===== -->
+<canvas id="bgCanvas"></canvas>
+<div class="orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+<div class="grid-bg"></div>
+<div class="horizon"></div>
+<div class="scan-line"></div>
+<div class="scan-line2"></div>
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
+<div class="side-line side-l"></div>
+<div class="side-line side-r"></div>
+
+<!-- ===========================
+     LIST PAGE
+     =========================== -->
+<div class="page" id="listPage">
+
+  <div class="site-hdr">
+    <div class="logo">⬡ NEXUS GAMING</div>
+    <div class="logo-sub">Premium Game Download Portal — اضغط على أي غلاف لعرض التفاصيل</div>
+  </div>
+
+  <div class="status-bar">
+    <span><span class="sb-dot"></span>ONLINE</span>
+    <span>| CSP ACTIVE</span>
+    <span>| XSS SHIELD</span>
+    <span id="gameCount">| 28 GAMES</span>
+  </div>
+
+  <nav class="nav" id="navBar">
+    <button class="nb active" data-f="all"   style="--ac:#00f5ff"><span class="dot"></span>All</button>
+    <button class="nb"        data-f="re"    style="--ac:#ff006e"><span class="dot"></span>Resident Evil</button>
+    <button class="nb"        data-f="gta"   style="--ac:#ff6600"><span class="dot"></span>GTA</button>
+    <button class="nb"        data-f="hit"   style="--ac:#cccccc"><span class="dot"></span>Hitman</button>
+    <button class="nb"        data-f="tr"    style="--ac:#d4a04a"><span class="dot"></span>Tomb Raider</button>
+    <button class="nb"        data-f="mp"    style="--ac:#ff3333"><span class="dot"></span>Max Payne</button>
+    <button class="nb"        data-f="forza" style="--ac:#00aaff"><span class="dot"></span>Forza</button>
+    <button class="nb"        data-f="mafia" style="--ac:#cc8800"><span class="dot"></span>Mafia</button>
+  </nav>
+
+  <div class="main" id="mainGrid"></div>
+</div>
+
+<!-- ===========================
+     DETAIL PAGE
+     =========================== -->
+<div class="page hidden" id="detailPage">
+
+  <button class="dp-back" id="backBtn">
+    <span class="back-arr">←</span>
+    <span>رجوع للقائمة</span>
+  </button>
+
+  <!-- Hero Section -->
+  <div class="dp-hero">
+    <div class="dp-hero-bg" id="dpBg"></div>
+    <div class="dp-hero-ov"></div>
+    <div class="dp-hero-in">
+      <div class="dp-cvr" id="dpCvr"></div>
+      <div>
+        <div class="dp-series-lbl" id="dpSeries"></div>
+        <div class="dp-title"      id="dpTitle"></div>
+        <div class="dp-rat"        id="dpRat"></div>
+        <div class="dp-tags"       id="dpTags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="dp-body">
+
+    <!-- Description -->
+    <div class="dp-sec">
+      <div class="dp-sec-ttl">عن اللعبة</div>
+      <p class="dp-desc" id="dpDesc"></p>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="dp-sec">
+      <div class="dp-sec-ttl">معلومات اللعبة</div>
+      <div class="info-grid" id="dpInfo"></div>
+    </div>
+
+    <!-- System Requirements -->
+    <div class="dp-sec">
+      <div class="dp-sec-ttl">متطلبات التشغيل</div>
+      <div class="req-wrap" id="dpReq"></div>
+    </div>
+
+    <!-- Download -->
+    <div class="dp-sec">
+      <div class="dp-sec-ttl">تحميل اللعبة</div>
+      <div class="dl-box">
+        <div class="dl-ttl" id="dpDlName"></div>
+        <div class="dl-sz"  id="dpDlSz"></div>
+
+        <button class="dl-btn" id="dpDlBtn">
+          ⬡ &nbsp; تحميل عبر التورنت
+        </button>
+
+        <div class="dl-prog" id="dpProg">
+          <div class="dl-pct" id="dpPct">0%</div>
+          <div class="dl-bw">
+            <div class="dl-bf" id="dpBar"></div>
+          </div>
+          <button class="dl-cancel" id="dpCancelBtn">إلغاء التحميل</button>
+        </div>
+
+        <div class="dl-warn">
+          ⚠ يجب تثبيت عميل تورنت (qBittorrent / uTorrent / Transmission) قبل التحميل<br>
+          الموقع لا يخزن أي ملف — روابط مغناطيسية فقط
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dp-body -->
+</div><!-- /detailPage -->
+
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="js/covers.js"></script>
+<script src="js/games.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
