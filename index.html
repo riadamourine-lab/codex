@@ -2,152 +2,173 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy"
-  content="default-src 'self';
-           style-src  'self' 'unsafe-inline' https://fonts.googleapis.com;
-           font-src   https://fonts.gstatic.com;
-           script-src 'self';
-           img-src    'self' data:;
-           connect-src 'none';">
-<title>NEXUS GAMING — Premium Download Portal</title>
+  content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; img-src 'self' data:; connect-src 'none';">
+<title>NEXUS GAMING — Download Portal</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ===== ANIMATED BACKGROUND ===== -->
-<canvas id="bgCanvas"></canvas>
-<div class="orbs">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="orb orb4"></div>
-</div>
+<!-- BG LAYERS -->
+<div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 <div class="grid-bg"></div>
-<div class="horizon"></div>
 <div class="scan-line"></div>
-<div class="scan-line2"></div>
-<div class="corner corner-tl"></div>
-<div class="corner corner-tr"></div>
-<div class="corner corner-bl"></div>
-<div class="corner corner-br"></div>
-<div class="side-line side-l"></div>
-<div class="side-line side-r"></div>
+<div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div><div class="corner corner-br"></div>
 
-<!-- ===========================
-     LIST PAGE
-     =========================== -->
+<!-- ===================== LIST PAGE ===================== -->
 <div class="page" id="listPage">
 
-  <div class="site-hdr">
-    <div class="logo">⬡ NEXUS GAMING</div>
-    <div class="logo-sub">Premium Game Download Portal — اضغط على أي غلاف لعرض التفاصيل</div>
-  </div>
+  <header class="site-hdr">
+    <div class="logo-wrap">
+      <div class="logo">⬡ NEXUS GAMING</div>
+      <div class="logo-sub">Premium Download Portal</div>
+    </div>
+    <button class="theme-btn" id="themeBtn" title="تبديل المظهر">☀</button>
+  </header>
 
   <div class="status-bar">
     <span><span class="sb-dot"></span>ONLINE</span>
-    <span>| CSP ACTIVE</span>
     <span>| XSS SHIELD</span>
-    <span id="gameCount">| 28 GAMES</span>
+    <span id="gameCount">| 0 GAMES</span>
   </div>
 
+  <!-- SEARCH BAR -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" class="search-input"
+        placeholder="ابحث عن لعبة..." autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="searchClear">✕</button>
+    </div>
+    <div class="search-results-count" id="searchCount"></div>
+  </div>
+
+  <!-- SMART DISCOVERY -->
+  <section class="smart-panel" id="smartPanel">
+    <div class="collection-bar" id="collectionBar">
+      <button class="chip active" data-c="all">All</button>
+      <button class="chip" data-c="active">Verified</button>
+      <button class="chip" data-c="lowpc">Low PC</button>
+      <button class="chip" data-c="small">Under 10GB</button>
+      <button class="chip" data-c="story">Story</button>
+      <button class="chip" data-c="openworld">Open World</button>
+      <button class="chip" data-c="horror">Horror</button>
+      <button class="chip" data-c="racing">Racing</button>
+      <button class="chip" data-c="top">Top Rated</button>
+    </div>
+    <div class="smart-filters">
+      <select id="sortSelect" class="smart-select" aria-label="Sort games">
+        <option value="default">Featured</option>
+        <option value="rating">Rating</option>
+        <option value="year">Newest</option>
+        <option value="size">Smallest</option>
+        <option value="title">A-Z</option>
+      </select>
+      <select id="sizeSelect" class="smart-select" aria-label="Filter by size">
+        <option value="all">Any Size</option>
+        <option value="small">Under 10GB</option>
+        <option value="medium">10-50GB</option>
+        <option value="large">50GB+</option>
+      </select>
+      <select id="yearSelect" class="smart-select" aria-label="Filter by era">
+        <option value="all">Any Year</option>
+        <option value="classic">Classic</option>
+        <option value="modern">Modern</option>
+        <option value="new">Recent</option>
+      </select>
+      <select id="pcPreset" class="smart-select" aria-label="PC power">
+        <option value="low">Low PC</option>
+        <option value="mid" selected>Mid PC</option>
+        <option value="high">High PC</option>
+        <option value="ultra">Ultra PC</option>
+      </select>
+      <label class="smart-toggle"><input type="checkbox" id="activeOnly"><span>Active only</span></label>
+      <label class="smart-toggle"><input type="checkbox" id="pcFitOnly"><span>Fits my PC</span></label>
+      <button class="smart-reset" id="resetFilters">Reset</button>
+    </div>
+  </section>
+
+  <!-- NAV FILTERS -->
   <nav class="nav" id="navBar">
-    <button class="nb active" data-f="all"   style="--ac:#00f5ff"><span class="dot"></span>All</button>
-    <button class="nb"        data-f="re"    style="--ac:#ff006e"><span class="dot"></span>Resident Evil</button>
-    <button class="nb"        data-f="gta"   style="--ac:#ff6600"><span class="dot"></span>GTA</button>
-    <button class="nb"        data-f="hit"   style="--ac:#cccccc"><span class="dot"></span>Hitman</button>
-    <button class="nb"        data-f="tr"    style="--ac:#d4a04a"><span class="dot"></span>Tomb Raider</button>
-    <button class="nb"        data-f="mp"    style="--ac:#ff3333"><span class="dot"></span>Max Payne</button>
-    <button class="nb"        data-f="forza" style="--ac:#00aaff"><span class="dot"></span>Forza</button>
-    <button class="nb"        data-f="mafia" style="--ac:#cc8800"><span class="dot"></span>Mafia</button>
+    <button class="nb active" data-f="all"    style="--ac:#00f5ff"><span class="dot"></span>All</button>
+    <button class="nb"        data-f="re"     style="--ac:#ff006e"><span class="dot"></span>Resident Evil</button>
+    <button class="nb"        data-f="gta"    style="--ac:#ff6600"><span class="dot"></span>GTA</button>
+    <button class="nb"        data-f="hit"    style="--ac:#ccc"   ><span class="dot"></span>Hitman</button>
+    <button class="nb"        data-f="tr"     style="--ac:#d4a04a"><span class="dot"></span>Tomb Raider</button>
+    <button class="nb"        data-f="mp"     style="--ac:#ff3333"><span class="dot"></span>Max Payne</button>
+    <button class="nb"        data-f="forza"  style="--ac:#00aaff"><span class="dot"></span>Forza</button>
+    <button class="nb"        data-f="mafia"  style="--ac:#cc8800"><span class="dot"></span>Mafia</button>
+    <button class="nb"        data-f="witcher"style="--ac:#c8a951"><span class="dot"></span>Witcher</button>
+    <button class="nb"        data-f="ac"     style="--ac:#00cc88"><span class="dot"></span>Assassin's</button>
+    <button class="nb"        data-f="fc"     style="--ac:#ff4400"><span class="dot"></span>Far Cry</button>
+    <button class="nb"        data-f="rdr"    style="--ac:#cc5533"><span class="dot"></span>Red Dead</button>
+    <button class="nb"        data-f="souls"  style="--ac:#ffaa00"><span class="dot"></span>Souls</button>
   </nav>
 
-  <div class="main" id="mainGrid"></div>
+  <main class="main" id="mainGrid"></main>
 </div>
 
-<!-- ===========================
-     DETAIL PAGE
-     =========================== -->
+<!-- ===================== DETAIL PAGE ===================== -->
 <div class="page hidden" id="detailPage">
 
   <button class="dp-back" id="backBtn">
     <span class="back-arr">←</span>
-    <span>رجوع للقائمة</span>
+    <span>رجوع</span>
   </button>
 
-  <!-- Hero Section -->
   <div class="dp-hero">
     <div class="dp-hero-bg" id="dpBg"></div>
     <div class="dp-hero-ov"></div>
     <div class="dp-hero-in">
       <div class="dp-cvr" id="dpCvr"></div>
-      <div>
+      <div class="dp-hero-text">
         <div class="dp-series-lbl" id="dpSeries"></div>
         <div class="dp-title"      id="dpTitle"></div>
         <div class="dp-rat"        id="dpRat"></div>
-        <div class="dp-tags"       id="dpTags"></div>
+        <!-- USER RATING -->
+        <div class="user-rating" id="userRating">
+          <span class="ur-label">تقييمك:</span>
+          <div class="stars" id="starsEl">
+            <span class="star" data-v="1">★</span>
+            <span class="star" data-v="2">★</span>
+            <span class="star" data-v="3">★</span>
+            <span class="star" data-v="4">★</span>
+            <span class="star" data-v="5">★</span>
+          </div>
+          <span class="ur-saved" id="urSaved"></span>
+        </div>
+        <div class="dp-tags" id="dpTags"></div>
       </div>
     </div>
   </div>
 
-  <!-- Body -->
   <div class="dp-body">
-
-    <!-- Description -->
-    <div class="dp-sec">
-      <div class="dp-sec-ttl">عن اللعبة</div>
-      <p class="dp-desc" id="dpDesc"></p>
-    </div>
-
-    <!-- Info Grid -->
-    <div class="dp-sec">
-      <div class="dp-sec-ttl">معلومات اللعبة</div>
-      <div class="info-grid" id="dpInfo"></div>
-    </div>
-
-    <!-- System Requirements -->
-    <div class="dp-sec">
-      <div class="dp-sec-ttl">متطلبات التشغيل</div>
-      <div class="req-wrap" id="dpReq"></div>
-    </div>
-
-    <!-- Download -->
+    <div class="dp-sec"><div class="dp-sec-ttl">عن اللعبة</div><p class="dp-desc" id="dpDesc"></p></div>
+    <div class="dp-sec"><div class="dp-sec-ttl">معلومات اللعبة</div><div class="info-grid" id="dpInfo"></div></div>
+    <div class="dp-sec"><div class="dp-sec-ttl">متطلبات التشغيل</div><div class="req-wrap" id="dpReq"></div></div>
     <div class="dp-sec">
       <div class="dp-sec-ttl">تحميل اللعبة</div>
       <div class="dl-box">
         <div class="dl-ttl" id="dpDlName"></div>
         <div class="dl-sz"  id="dpDlSz"></div>
-
-        <button class="dl-btn" id="dpDlBtn">
-          ⬡ &nbsp; تحميل عبر التورنت
-        </button>
-
+        <button class="dl-btn" id="dpDlBtn">⬡ &nbsp; تحميل عبر التورنت</button>
         <div class="dl-prog" id="dpProg">
           <div class="dl-pct" id="dpPct">0%</div>
-          <div class="dl-bw">
-            <div class="dl-bf" id="dpBar"></div>
-          </div>
-          <button class="dl-cancel" id="dpCancelBtn">إلغاء التحميل</button>
+          <div class="dl-bw"><div class="dl-bf" id="dpBar"></div></div>
+          <button class="dl-cancel" id="dpCancelBtn">إلغاء</button>
         </div>
-
-        <div class="dl-warn">
-          ⚠ يجب تثبيت عميل تورنت (qBittorrent / uTorrent / Transmission) قبل التحميل<br>
-          الموقع لا يخزن أي ملف — روابط مغناطيسية فقط
-        </div>
+        <div class="dl-warn">⚠ يجب تثبيت qBittorrent أو uTorrent قبل التحميل</div>
       </div>
     </div>
+  </div>
+</div>
 
-  </div><!-- /dp-body -->
-</div><!-- /detailPage -->
-
-
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- ===== SCRIPTS ===== -->
 <script src="js/covers.js"></script>
 <script src="js/games.js"></script>
 <script src="js/app.js"></script>
-
 </body>
 </html>
